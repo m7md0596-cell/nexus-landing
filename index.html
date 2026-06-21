@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexus — نظام تشغيل العيادات بالذكاء الاصطناعي</title>
+<meta name="description" content="Nexus: AI Receptionist + Smart Routing System for clinics in Saudi Arabia. WhatsApp booking, smart routing, CRM, reminders — built for KSA clinics.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0B1F3A;
+    --navy-2:#10294D;
+    --teal:#0EA5A4;
+    --teal-2:#0C8483;
+    --ink:#0B1220;
+    --muted:#5B6472;
+    --line:#E7EAEE;
+    --bg:#FFFFFF;
+    --bg-soft:#F6F8FA;
+    --gold:#D7A23B;
+    --radius:16px;
+    --maxw:1140px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Tajawal','Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.6;
+  }
+  html[data-lang="en"] body{ font-family:'Inter','Tajawal',sans-serif; }
+  html[data-lang="en"]{ direction:ltr; }
+
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+
+  /* lang visibility */
+  [data-en], [data-ar]{}
+  html[data-lang="ar"] .en-only{display:none !important;}
+  html[data-lang="en"] .ar-only{display:none !important;}
+
+  /* header */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:saturate(180%) blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex; align-items:center; justify-content:space-between; padding:16px 0;}
+  .brand{display:flex; align-items:center; gap:10px; font-weight:800; font-size:20px; color:var(--navy);}
+  .brand .dot{width:10px;height:10px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 4px rgba(14,165,164,.15);}
+  .navlinks{display:flex; align-items:center; gap:28px; font-weight:600; font-size:15px; color:var(--ink);}
+  .navlinks a:hover{color:var(--teal-2);}
+  .navactions{display:flex; align-items:center; gap:12px;}
+  .lang-toggle{
+    border:1px solid var(--line); background:var(--bg-soft); border-radius:999px;
+    padding:8px 14px; font-weight:700; font-size:13px; cursor:pointer; color:var(--navy);
+  }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:11px 20px; border-radius:10px; font-weight:700; font-size:14px;
+    cursor:pointer; border:1px solid transparent; white-space:nowrap;
+  }
+  .btn-primary{background:var(--teal); color:#fff;}
+  .btn-primary:hover{background:var(--teal-2);}
+  .btn-dark{background:var(--navy); color:#fff;}
+  .btn-dark:hover{background:var(--navy-2);}
+  .btn-ghost{background:transparent; border:1px solid var(--line); color:var(--ink);}
+  .btn-ghost:hover{border-color:var(--teal);}
+  @media (max-width:860px){ .navlinks{display:none;} }
+
+  /* hero */
+  .hero{
+    background:radial-gradient(1100px 500px at 80% -10%, rgba(14,165,164,.10), transparent),
+               radial-gradient(900px 500px at 0% 0%, rgba(11,31,58,.06), transparent);
+    padding:84px 0 60px;
+  }
+  .hero-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:48px; align-items:center;}
+  @media (max-width:900px){ .hero-grid{grid-template-columns:1fr;} }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    background:rgba(14,165,164,.12); color:var(--teal-2);
+    font-weight:700; font-size:13px; padding:7px 14px; border-radius:999px; margin-bottom:18px;
+  }
+  h1{font-size:44px; line-height:1.25; margin:0 0 18px; color:var(--navy); font-weight:800;}
+  @media (max-width:600px){ h1{font-size:32px;} }
+  .lead{font-size:18px; color:var(--muted); margin:0 0 28px; max-width:560px;}
+  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:28px;}
+  .trustrow{display:flex; gap:28px; flex-wrap:wrap; font-size:13px; color:var(--muted); font-weight:600;}
+  .trustrow span{display:flex; align-items:center; gap:6px;}
+  .trustrow b{color:var(--ink);}
+
+  .hero-card{
+    background:#fff; border:1px solid var(--line); border-radius:20px; padding:22px;
+    box-shadow:0 20px 60px rgba(11,31,58,.10);
+  }
+  .chat-bubble{
+    border-radius:14px; padding:12px 16px; margin-bottom:10px; font-size:14px; max-width:85%;
+  }
+  .chat-in{background:var(--bg-soft); color:var(--ink); border:1px solid var(--line);}
+  .chat-out{background:var(--teal); color:#fff; margin-inline-start:auto;}
+  .chat-meta{font-size:11px; color:var(--muted); margin:14px 0 8px; text-align:center;}
+
+  /* sections */
+  section{padding:72px 0;}
+  .section-head{max-width:680px; margin:0 auto 44px; text-align:center;}
+  .section-head h2{font-size:32px; color:var(--navy); margin:0 0 12px; font-weight:800;}
+  .section-head p{color:var(--muted); font-size:16px; margin:0;}
+  .tag{
+    display:inline-block; background:rgba(11,31,58,.06); color:var(--navy);
+    font-size:13px; font-weight:700; padding:6px 14px; border-radius:999px; margin-bottom:14px;
+  }
+
+  /* problem/solution */
+  .compare{display:grid; grid-template-columns:1fr 1fr; gap:24px;}
+  @media (max-width:800px){ .compare{grid-template-columns:1fr;} }
+  .compare .card{border-radius:var(--radius); padding:28px; border:1px solid var(--line);}
+  .card-bad{background:#FBF6F2;}
+  .card-good{background:#F2FAF9;}
+  .compare h3{margin:0 0 16px; font-size:18px; font-weight:800;}
+  .compare ul{margin:0; padding:0; list-style:none;}
+  .compare li{display:flex; gap:10px; align-items:flex-start; margin-bottom:12px; font-size:15px; color:var(--ink);}
+  .ico{flex:0 0 auto; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; color:#fff; margin-top:2px;}
+  .ico-bad{background:#D9534F;}
+  .ico-good{background:var(--teal);}
+
+  /* features */
+  .features{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+  @media (max-width:900px){ .features{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:600px){ .features{grid-template-columns:1fr;} }
+  .feature{
+    border:1px solid var(--line); border-radius:var(--radius); padding:26px; background:#fff;
+    transition:transform .15s, box-shadow .15s;
+  }
+  .feature:hover{transform:translateY(-3px); box-shadow:0 14px 30px rgba(11,31,58,.08);}
+  .feature .fico{
+    width:44px; height:44px; border-radius:12px; background:rgba(14,165,164,.12);
+    display:flex; align-items:center; justify-content:center; font-size:20px; margin-bottom:16px;
+  }
+  .feature h3{margin:0 0 8px; font-size:17px; font-weight:800; color:var(--navy);}
+  .feature p{margin:0; font-size:14px; color:var(--muted);}
+
+  /* how it works */
+  .steps{display:grid; grid-template-columns:repeat(4,1fr); gap:20px;}
+  @media (max-width:900px){ .steps{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:600px){ .steps{grid-template-columns:1fr;} }
+  .step{position:relative; padding:24px; border:1px solid var(--line); border-radius:var(--radius); background:#fff;}
+  .step .num{
+    width:32px; height:32px; border-radius:50%; background:var(--navy); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:14px; margin-bottom:14px;
+  }
+  .step h4{margin:0 0 8px; font-size:15px; font-weight:800;}
+  .step p{margin:0; font-size:13.5px; color:var(--muted);}
+
+  .bg-soft{background:var(--bg-soft);}
+
+  /* pricing */
+  .pricing{display:grid; grid-template-columns:repeat(4,1fr); gap:20px;}
+  @media (max-width:1000px){ .pricing{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:600px){ .pricing{grid-template-columns:1fr;} }
+  .plan{
+    border:1px solid var(--line); border-radius:18px; padding:28px; background:#fff; display:flex; flex-direction:column;
+  }
+  .plan.featured{border-color:var(--teal); box-shadow:0 18px 40px rgba(14,165,164,.16); position:relative;}
+  .plan .badge{
+    position:absolute; top:-12px; inset-inline-start:24px; background:var(--teal); color:#fff;
+    font-size:11px; font-weight:800; padding:5px 12px; border-radius:999px;
+  }
+  .plan h3{margin:0 0 4px; font-size:16px; font-weight:800; color:var(--navy);}
+  .plan .price{font-size:30px; font-weight:800; margin:10px 0 2px; color:var(--ink);}
+  .plan .price span{font-size:13px; font-weight:600; color:var(--muted);}
+  .plan .desc{font-size:13px; color:var(--muted); margin-bottom:18px;}
+  .plan ul{list-style:none; margin:0 0 22px; padding:0; flex:1;}
+  .plan li{display:flex; gap:8px; align-items:flex-start; font-size:13.5px; margin-bottom:10px; color:var(--ink);}
+  .plan li .ico{width:16px;height:16px;font-size:10px;}
+
+  /* differentiators */
+  .diffgrid{display:grid; grid-template-columns:repeat(2,1fr); gap:16px;}
+  @media (max-width:700px){ .diffgrid{grid-template-columns:1fr;} }
+  .diffrow{display:flex; gap:12px; align-items:flex-start; padding:18px; border:1px solid var(--line); border-radius:14px; background:#fff;}
+  .diffrow b{display:block; margin-bottom:4px; color:var(--navy); font-size:14.5px;}
+  .diffrow span{font-size:13.5px; color:var(--muted);}
+
+  /* cta */
+  .cta-band{
+    background:linear-gradient(135deg, var(--navy), #163a66);
+    border-radius:24px; padding:56px 40px; text-align:center; color:#fff;
+  }
+  .cta-band h2{margin:0 0 12px; font-size:30px; font-weight:800;}
+  .cta-band p{margin:0 0 26px; color:rgba(255,255,255,.78); font-size:16px;}
+  .cta-band .hero-ctas{justify-content:center;}
+
+  footer{border-top:1px solid var(--line); padding:40px 0; background:var(--bg-soft);}
+  .footgrid{display:flex; justify-content:space-between; flex-wrap:wrap; gap:20px; align-items:center;}
+  .footnote{font-size:13px; color:var(--muted);}
+  .disclaimer{
+    max-width:var(--maxw); margin:0 auto; padding:0 24px 36px; font-size:12.5px; color:var(--muted);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand"><span class="dot"></span> Nexus</div>
+    <nav class="navlinks">
+      <a href="#features" data-ar="المزايا" data-en="Features">المزايا</a>
+      <a href="#how" data-ar="كيف يعمل" data-en="How it works">كيف يعمل</a>
+      <a href="#pricing" data-ar="الأسعار" data-en="Pricing">الأسعار</a>
+      <a href="#contact" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a>
+    </nav>
+    <div class="navactions">
+      <button class="lang-toggle" id="langToggle">EN</button>
+      <a class="btn btn-primary" href="https://wa.me/966507237246?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8C%D8%8C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%AD%D8%AC%D8%B9%D8%B1%D9%8A%D8%B1%D8%A7%D9%8B%20%D8%AF%D9%8A%D9%85%D9%88%20%D9%84%D9%80%20Nexus" target="_blank" rel="noopener">
+        <span data-ar="جرّب عبر واتساب" data-en="Try on WhatsApp">جرّب عبر واتساب</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">⚡ <span data-ar="مصمم خصيصاً لعيادات السعودية" data-en="Built specifically for Saudi clinics">مصمم خصيصاً لعيادات السعودية</span></div>
+      <h1>
+        <span data-ar="مُستقبل ذكي وتوجيه آلي لعيادتك — لا تشخيص، فقط كفاءة" data-en="An AI receptionist and smart routing system for your clinic">مُستقبل ذكي وتوجيه آلي لعيادتك — لا تشخيص، فقط كفاءة</span>
+      </h1>
+      <p class="lead" data-ar="Nexus يستقبل مرضاك على واتساب، يحجز المواعيد، يوجّههم للقسم الصحيح، ويرسل التذكيرات — بدون ما يفوتك أي اتصال أو حجز." data-en="Nexus answers your patients on WhatsApp, books appointments, routes them to the right department, and sends reminders — so you never miss a call or a booking again.">Nexus يستقبل مرضاك على واتساب، يحجز المواعيد، يوجّههم للقسم الصحيح، ويرسل التذكيرات — بدون ما يفوتك أي اتصال أو حجز.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-dark" href="#contact"><span data-ar="اطلب عرضاً تجريبياً" data-en="Book a demo">اطلب عرضاً تجريبياً</span></a>
+        <a class="btn btn-ghost" href="#how"><span data-ar="شاهد كيف يعمل" data-en="See how it works">شاهد كيف يعمل</span></a>
+      </div>
+      <div class="trustrow">
+        <span>🇸🇦 <b data-ar="مبني للسوق السعودي" data-en="Built for the KSA market">مبني للسوق السعودي</b></span>
+        <span>💬 <b data-ar="عربي طبيعي ومهني" data-en="Natural, professional Arabic">عربي طبيعي ومهني</b></span>
+        <span>🔒 <b data-ar="لا تشخيص طبي، فقط توجيه" data-en="No diagnosis — routing only">لا تشخيص طبي، فقط توجيه</b></span>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="chat-meta" data-ar="محادثة واتساب — توضيحية" data-en="WhatsApp conversation — illustrative">محادثة واتساب — توضيحية</div>
+      <div class="chat-bubble chat-in" data-ar="مرحباً 👋 معك مساعد عيادة الرعاية الذكية. كيف أقدر أساعدك؟
+1️⃣ حجز موعد
+2️⃣ الاستفسار عن موعد
+3️⃣ التحدث مع موظف"
+        data-en="Hello 👋 This is the Smart Care Clinic assistant. How can I help?
+1️⃣ Book an appointment
+2️⃣ Check an appointment
+3️⃣ Talk to staff">مرحباً 👋 معك مساعد عيادة الرعاية الذكية. كيف أقدر أساعدك؟
+1️⃣ حجز موعد
+2️⃣ الاستفسار عن موعد
+3️⃣ التحدث مع موظف</div>
+      <div class="chat-bubble chat-out" data-ar="حجز موعد" data-en="Book an appointment">حجز موعد</div>
+      <div class="chat-bubble chat-in" data-ar="تمام ✅ أي قسم تحتاج؟
+طب عام · أسنان · نساء وولادة · أطفال · عيون" data-en="Great ✅ Which department do you need?
+General · Dental · OB/GYN · Pediatrics · Ophthalmology">تمام ✅ أي قسم تحتاج؟
+طب عام · أسنان · نساء وولادة · أطفال · عيون</div>
+      <div class="chat-bubble chat-out" data-ar="أسنان" data-en="Dental">أسنان</div>
+      <div class="chat-bubble chat-in" data-ar="تم تأكيد موعدك يوم الأحد 11:00 ص مع د. سارة. نتشرف بزيارتك 🦷" data-en="Your appointment is confirmed for Sunday 11:00 AM with Dr. Sarah. We look forward to seeing you 🦷">تم تأكيد موعدك يوم الأحد 11:00 ص مع د. سارة. نتشرف بزيارتك 🦷</div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-soft">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag" data-ar="المشكلة" data-en="The problem">المشكلة</div>
+      <h2 data-ar="كل اتصال فايت = مريض راح لعيادة ثانية" data-en="Every missed call is a patient who booked elsewhere">كل اتصال فايت = مريض راح لعيادة ثانية</h2>
+      <p data-ar="السكرتارية التقليدية محدودة بساعات العمل، الأخطاء البشرية، وضغط المكالمات. Nexus يحل هذا بدون ما يستبدل فريقك." data-en="Traditional front-desk staff are limited by office hours, human error, and call volume. Nexus solves this without replacing your team.">السكرتارية التقليدية محدودة بساعات العمل، الأخطاء البشرية، وضغط المكالمات. Nexus يحل هذا بدون ما يستبدل فريقك.</p>
+    </div>
+    <div class="compare">
+      <div class="card card-bad">
+        <h3 data-ar="بدون Nexus" data-en="Without Nexus">بدون Nexus</h3>
+        <ul>
+          <li><span class="ico ico-bad">✕</span><span data-ar="مكالمات فايتة بعد ساعات الدوام" data-en="Missed calls after hours">مكالمات فايتة بعد ساعات الدوام</span></li>
+          <li><span class="ico ico-bad">✕</span><span data-ar="حجوزات مكتوبة بخط اليد أو واتساب متفرق" data-en="Bookings scattered across handwritten notes and WhatsApp">حجوزات مكتوبة بخط اليد أو واتساب متفرق</span></li>
+          <li><span class="ico ico-bad">✕</span><span data-ar="تكرار وتعارض في المواعيد" data-en="Double-bookings and scheduling conflicts">تكرار وتعارض في المواعيد</span></li>
+          <li><span class="ico ico-bad">✕</span><span data-ar="نسيان المرضى لمواعيدهم (لا تذكيرات)" data-en="Patients forget appointments — no reminders">نسيان المرضى لمواعيدهم (لا تذكيرات)</span></li>
+        </ul>
+      </div>
+      <div class="card card-good">
+        <h3 data-ar="مع Nexus" data-en="With Nexus">مع Nexus</h3>
+        <ul>
+          <li><span class="ico ico-good">✓</span><span data-ar="رد فوري 24/7 على واتساب" data-en="Instant 24/7 replies on WhatsApp">رد فوري 24/7 على واتساب</span></li>
+          <li><span class="ico ico-good">✓</span><span data-ar="كل الحجوزات في نظام واحد مركزي" data-en="Every booking in one central system">كل الحجوزات في نظام واحد مركزي</span></li>
+          <li><span class="ico ico-good">✓</span><span data-ar="منع تلقائي لتعارض المواعيد" data-en="Automatic conflict prevention">منع تلقائي لتعارض المواعيد</span></li>
+          <li><span class="ico ico-good">✓</span><span data-ar="تذكيرات تلقائية تقلل الغياب" data-en="Automated reminders cut no-shows">تذكيرات تلقائية تقلل الغياب</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag" data-ar="المنصة" data-en="The platform">المنصة</div>
+      <h2 data-ar="نظام تشغيل كامل لعيادتك، لا روبوت محادثة فقط" data-en="A full clinic operating system — not just a chatbot">نظام تشغيل كامل لعيادتك، لا روبوت محادثة فقط</h2>
+      <p data-ar="مُستقبل واتساب، توجيه ذكي، CRM، تذكيرات، ولوحة تحكم — كل شي مربوط مع بعض." data-en="WhatsApp receptionist, smart routing, CRM, reminders, and a dashboard — all connected.">مُستقبل واتساب، توجيه ذكي، CRM، تذكيرات، ولوحة تحكم — كل شي مربوط مع بعض.</p>
+    </div>
+    <div class="features">
+      <div class="feature">
+        <div class="fico">💬</div>
+        <h3 data-ar="مُستقبل واتساب بالذكاء الاصطناعي" data-en="AI WhatsApp Receptionist">مُستقبل واتساب بالذكاء الاصطناعي</h3>
+        <p data-ar="يرد على المرضى بعربي طبيعي، يفهم القصد، ويحجز المواعيد تلقائياً — بدون انتظار." data-en="Replies to patients in natural Arabic, understands intent, and books appointments automatically — no wait time.">يرد على المرضى بعربي طبيعي، يفهم القصد، ويحجز المواعيد تلقائياً — بدون انتظار.</p>
+      </div>
+      <div class="feature">
+        <div class="fico">🧭</div>
+        <h3 data-ar="توجيه ذكي للقسم الصحيح" data-en="Smart Department Routing">توجيه ذكي للقسم الصحيح</h3>
+        <p data-ar="يصنّف نية المريض ويوجّهه للقسم المناسب — بدون أي تشخيص طبي، فقط تصنيف وتوجيه." data-en="Classifies patient intent and routes to the right department — no medical diagnosis, classification and routing only.">يصنّف نية المريض ويوجّهه للقسم المناسب — بدون أي تشخيص طبي، فقط تصنيف وتوجيه.</p>
+      </div>
+      <div class="feature">
+        <div class="fico">🙋</div>
+        <h3 data-ar="تحويل فوري لموظف بشري" data-en="Instant Human Handoff">تحويل فوري لموظف بشري</h3>
+        <p data-ar="أي حالة حساسة أو طلب خاص يتحول مباشرة لموظف الاستقبال عبر تنبيه واتساب فوري." data-en="Any sensitive case or special request is escalated instantly to staff via a WhatsApp alert.">أي حالة حساسة أو طلب خاص يتحول مباشرة لموظف الاستقبال عبر تنبيه واتساب فوري.</p>
+      </div>
+      <div class="feature">
+        <div class="fico">📅</div>
+        <h3 data-ar="حجز وتذكير تلقائي" data-en="Booking & Automated Reminders">حجز وتذكير تلقائي</h3>
+        <p data-ar="منع تعارض المواعيد تلقائياً، وتذكيرات واتساب قبل الموعد بـ 24 و2 ساعة لتقليل الغياب." data-en="Automatic conflict prevention plus WhatsApp reminders 24h and 2h before each appointment to cut no-shows.">منع تعارض المواعيد تلقائياً، وتذكيرات واتساب قبل الموعد بـ 24 و2 ساعة لتقليل الغياب.</p>
+      </div>
+      <div class="feature">
+        <div class="fico">🗂️</div>
+        <h3 data-ar="CRM ومتابعة المرضى" data-en="CRM & Patient Records">CRM ومتابعة المرضى</h3>
+        <p data-ar="سجل كامل لكل مريض، تاريخ الحجوزات، وقوائم انتظار تلقائية عند الإلغاء." data-en="A full patient record, booking history, and automatic waitlist fill-ins when slots open up.">سجل كامل لكل مريض، تاريخ الحجوزات، وقوائم انتظار تلقائية عند الإلغاء.</p>
+      </div>
+      <div class="feature">
+        <div class="fico">📊</div>
+        <h3 data-ar="لوحة تحكم وتحليلات" data-en="Dashboard & Analytics">لوحة تحكم وتحليلات</h3>
+        <p data-ar="لوحة ويب فيها كل المواعيد، الإشعارات الفورية، والتقارير — تعمل من أي جهاز." data-en="A web dashboard with all appointments, live push notifications, and reporting — works on any device.">لوحة ويب فيها كل المواعيد، الإشعارات الفورية، والتقارير — تعمل من أي جهاز.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how" class="bg-soft">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag" data-ar="كيف يعمل" data-en="How it works">كيف يعمل</div>
+      <h2 data-ar="من رسالة واتساب إلى موعد مؤكد في دقائق" data-en="From a WhatsApp message to a confirmed booking in minutes">من رسالة واتساب إلى موعد مؤكد في دقائق</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="num">1</div>
+        <h4 data-ar="المريض يبدأ محادثة" data-en="Patient starts a chat">المريض يبدأ محادثة</h4>
+        <p data-ar="يكتب على رقم واتساب العيادة في أي وقت، ليل أو نهار." data-en="They message your clinic's WhatsApp number, any time, day or night.">يكتب على رقم واتساب العيادة في أي وقت، ليل أو نهار.</p>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <h4 data-ar="Nexus يفهم ويوجّه" data-en="Nexus understands & routes">Nexus يفهم ويوجّه</h4>
+        <p data-ar="يحدد القسم المناسب ويعرض الأطباء والمواعيد المتاحة فعلاً." data-en="Identifies the right department and shows real available doctors and time slots.">يحدد القسم المناسب ويعرض الأطباء والمواعيد المتاحة فعلاً.</p>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <h4 data-ar="الحجز يتأكد فوراً" data-en="Booking confirmed instantly">الحجز يتأكد فوراً</h4>
+        <p data-ar="يحفظ في النظام تلقائياً مع منع أي تعارض في الجدول." data-en="Saved to the system automatically with conflict prevention built in.">يحفظ في النظام تلقائياً مع منع أي تعارض في الجدول.</p>
+      </div>
+      <div class="step">
+        <div class="num">4</div>
+        <h4 data-ar="تذكير وتحليلات لعيادتك" data-en="Reminders & analytics for your clinic">تذكير وتحليلات لعيادتك</h4>
+        <p data-ar="يصل تذكير تلقائي للمريض، وتشاهد كل البيانات في لوحة التحكم." data-en="The patient gets an automatic reminder, and you see all the data in your dashboard.">يصل تذكير تلقائي للمريض، وتشاهد كل البيانات في لوحة التحكم.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag" data-ar="الأسعار" data-en="Pricing">الأسعار</div>
+      <h2 data-ar="أسعار تناسب عيادتك من اليوم الأول" data-en="Pricing that fits your clinic from day one">أسعار تناسب عيادتك من اليوم الأول</h2>
+      <p data-ar="بدون عقود طويلة، بدون رسوم خفية." data-en="No long contracts, no hidden fees.">بدون عقود طويلة، بدون رسوم خفية.</p>
+    </div>
+    <div class="pricing">
+      <div class="plan">
+        <h3 data-ar="أساسي" data-en="Basic">أساسي</h3>
+        <div class="desc" data-ar="لعيادة فردية صغيرة" data-en="For a small single-doctor clinic">لعيادة فردية صغيرة</div>
+        <div class="price">299 <span data-ar="ر.س / شهرياً" data-en="SAR / month">ر.س / شهرياً</span></div>
+        <ul>
+          <li><span class="ico ico-good">✓</span><span data-ar="طبيب واحد" data-en="1 doctor">طبيب واحد</span></li>
+          <li><span class="ico ico-good">✓</span><span data-ar="حجز المواعيد" data-en="Appointment booking">حجز المواعيد</span></li>
+          <li><span class="ico ico-good">✓</span><span data-ar="مُستقبل واتساب آلي" data-en="WhatsApp bot receptionist">مُستقبل واتساب آلي</span></li>
+          <li><span class="ico ico-good">✓</span><span data-ar="سجلات المرضى" data-en="Patient records">سجلات المرضى</span></li>
+        </ul>
+        <a class="btn btn-ghost" href="#contact" data-ar="ابدأ الآن" data-en="Get started">ابدأ الآن</a>
+      </div>
+      <div class="plan featured">
+        <div class="badge" data-ar="الأكثر طلباً" data-en="Most popular">الأكثر طلباً</div>
+        <h3 data-ar="احترافي" data-en="Professional">احترافي</h3>
+        <div class="desc" data-ar="لعيادة متعددة الأطباء" data-en="For a multi-doctor clinic">لعيادة متعددة الأطباء</div>
+        <div class="price">599 <span data-ar="ر.س / شهرياً" data-en="SAR / month">ر.س / شهرياً</span></div>
+        <ul>
+          <li><span class="ico ico-good">✓</span><span data-ar="حتى 3 أطباء" data-en="Up to 3 doctors">حتى 3 أطباء</span></li>
+          <li><span class="ico ico-good">✓</span><span data-ar="تذكيرات تلقائية" data-en="Automated reminders">تذكيرات تلقائية</span></li>
+          <li><span class="ico ico-good">✓</span><span data-ar="تحليلات وتقارير" data-en="Analytics & reporting">تحليلات وتقارير</span></li>
+          <li><span class="ico ico-good">✓</span><span data-ar="صفحة حجز أونلاين" data-en="Online booking page">صفحة حجز أونلاين</span></li>
+        </ul>
+        <a class="btn btn-primary" href="#contact" data-ar="ابدأ الآن" data-en="Get started">ابدأ الآن</a>
+      </div>
+      <div class="plan">
+        <h3 data-ar="متقدم" data-en="Advanced">متقدم</h3>
+        <div class="desc" data-ar="لعيادة متوسطة إلى كبيرة" data-en="For a medium-to-large clinic">لعيادة متوسطة إلى كبيرة</div>
+        <div class="price">999 <span data-ar="ر.س / شهرياً" data-en="SAR / month">ر.س / شهرياً</span></div>
+        <ul>
+          <li><span class="ico ico-good">✓</span><span data-ar="عدد غير محدود من الأطباء" data-en="Unlimited doctors">عدد غير محدود من الأطباء</span></li>
+          <li><span class="ico ico-good">✓</span><span data-ar="مُستقبل صوتي بالذكاء الاصطناعي" data-en="Voice AI receptionist">مُستقبل صوتي بالذكاء الاصطناعي</span></li>
+          <li><span class="ico ico-good">✓</span><span data-ar="فوترة متوافقة مع زاتكا" data-en="ZATCA-compliant invoicing">فوترة متوافقة مع زاتكا</span></li>
+          <li><span class="ico ico-good">✓</span><span data-ar="دعم ذو أولوية" data-en="Priority support">دعم ذو أولوية</span></li>
+        </ul>
+        <a class="btn btn-ghost" href="#contact" data-ar="ابدأ الآن" data-en="Get started">ابدأ الآن</a>
+      </div>
+      <div class="plan">
+        <h3 data-ar="Enterprise" data-en="Enterprise">Enterprise</h3>
+        <div class="desc" data-ar="لشبكات العيادات متعددة الفروع" data-en="For multi-branch clinic networks">لشبكات العيادات متعددة الفروع</div>
+        <div class="price" data-ar="مخصص" data-en="Custom">مخصص</div>
+        <ul>
+          <li><span class="ico ico-good">✓</span><span data-ar="فروع متعددة" data-en="Multi-branch support">فروع متعددة</span></li>
+          <li><span class="ico ico-good">✓</span><span data-ar="نسخة بعلامتك التجارية" data-en="White-label option">نسخة بعلامتك التجارية</span></li>
+          <li><span class="ico ico-good">✓</span><span data-ar="وصول API" data-en="API access">وصول API</span></li>
+          <li><span class="ico ico-good">✓</span><span data-ar="مدير حساب مخصص" data-en="Dedicated account manager">مدير حساب مخصص</span></li>
+        </ul>
+        <a class="btn btn-ghost" href="#contact" data-ar="تواصل معنا" data-en="Contact us">تواصل معنا</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-soft">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag" data-ar="لماذا Nexus" data-en="Why Nexus">لماذا Nexus</div>
+      <h2 data-ar="بُني للسوق السعودي من البداية" data-en="Built for the Saudi market from the ground up">بُني للسوق السعودي من البداية</h2>
+    </div>
+    <div class="diffgrid">
+      <div class="diffrow">
+        <span class="ico ico-good">✓</span>
+        <div><b data-ar="تركيز كامل على السعودية" data-en="100% Saudi-focused">تركيز كامل على السعودية</b><span data-ar="مبني للهجة واللغة والسوق السعودي، لا حل عام مترجم." data-en="Built for Saudi dialect, language, and market — not a generic translated tool.">مبني للهجة واللغة والسوق السعودي، لا حل عام مترجم.</span></div>
+      </div>
+      <div class="diffrow">
+        <span class="ico ico-good">✓</span>
+        <div><b data-ar="محادثة واتساب حقيقية، لا قوائم جامدة فقط" data-en="Real conversational WhatsApp, not just static menus">محادثة واتساب حقيقية، لا قوائم جامدة فقط</b><span data-ar="فهم نية المريض، لا أزرار اختيار فقط." data-en="Understands patient intent — not just button taps.">فهم نية المريض، لا أزرار اختيار فقط.</span></div>
+      </div>
+      <div class="diffrow">
+        <span class="ico ico-good">✓</span>
+        <div><b data-ar="مُستقبل صوتي قادم" data-en="Voice AI receptionist (coming)">مُستقبل صوتي قادم</b><span data-ar="يرد على المكالمات الهاتفية ويحجز المواعيد صوتياً." data-en="Answers phone calls and books appointments by voice.">يرد على المكالمات الهاتفية ويحجز المواعيد صوتياً.</span></div>
+      </div>
+      <div class="diffrow">
+        <span class="ico ico-good">✓</span>
+        <div><b data-ar="جاهزية للامتثال السعودي" data-en="Saudi compliance-ready">جاهزية للامتثال السعودي</b><span data-ar="فوترة متوافقة مع زاتكا في الخطط المتقدمة." data-en="ZATCA-compliant invoicing on advanced plans.">فوترة متوافقة مع زاتكا في الخطط المتقدمة.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="cta-band">
+      <h2 data-ar="جاهز تشوف Nexus يشتغل لعيادتك؟" data-en="Ready to see Nexus work for your clinic?">جاهز تشوف Nexus يشتغل لعيادتك؟</h2>
+      <p data-ar="عرض تجريبي مباشر على واتساب — بدون أي تعهد." data-en="A live WhatsApp demo — no commitment required.">عرض تجريبي مباشر على واتساب — بدون أي تعهد.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="https://wa.me/966507237246?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A3%D8%B9%D8%B1%D9%81%20%D8%A3%D9%83%D8%AB%D8%B1%20%D8%B9%D9%86%20Nexus%20%D9%84%D8%B9%D9%8A%D8%A7%D8%AF%D8%AA%D9%8A" target="_blank" rel="noopener">
+          <span data-ar="تواصل عبر واتساب" data-en="Chat on WhatsApp">تواصل عبر واتساب</span>
+        </a>
+        <a class="btn btn-ghost" style="background:#fff" href="mailto:m7md0596@hotmail.com">
+          <span data-ar="راسلنا بالإيميل" data-en="Email us">راسلنا بالإيميل</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footgrid">
+    <div class="brand"><span class="dot"></span> Nexus</div>
+    <div class="footnote" data-ar="© 2026 Nexus. جميع الحقوق محفوظة." data-en="© 2026 Nexus. All rights reserved.">© 2026 Nexus. جميع الحقوق محفوظة.</div>
+  </div>
+</footer>
+<div class="disclaimer" data-ar="Nexus نظام مُستقبل ذكي وتوجيه — وليس بديلاً عن التشخيص أو الاستشارة الطبية. جميع الحالات الطبية تتم مراجعتها من قبل الطاقم الطبي للعيادة." data-en="Nexus is an AI receptionist and routing system — not a substitute for medical diagnosis or consultation. All medical cases are reviewed by the clinic's own medical staff.">Nexus نظام مُستقبل ذكي وتوجيه — وليس بديلاً عن التشخيص أو الاستشارة الطبية. جميع الحالات الطبية تتم مراجعتها من قبل الطاقم الطبي للعيادة.</div>
+
+<script>
+(function(){
+  var STORAGE_KEY = 'nexus-lang';
+  var html = document.documentElement;
+  function applyLang(lang){
+    html.setAttribute('data-lang', lang);
+    html.setAttribute('lang', lang);
+    html.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+    document.querySelectorAll('[data-ar][data-en]').forEach(function(el){
+      el.textContent = lang === 'ar' ? el.getAttribute('data-ar') : el.getAttribute('data-en');
+    });
+    var toggle = document.getElementById('langToggle');
+    if(toggle){ toggle.textContent = lang === 'ar' ? 'EN' : 'AR'; }
+    try{ localStorage.setItem(STORAGE_KEY, lang); }catch(e){}
+  }
+  var saved = 'ar';
+  try{ saved = localStorage.getItem(STORAGE_KEY) || 'ar'; }catch(e){}
+  applyLang(saved);
+  document.getElementById('langToggle').addEventListener('click', function(){
+    var current = html.getAttribute('data-lang') || 'ar';
+    applyLang(current === 'ar' ? 'en' : 'ar');
+  });
+})();
+</script>
+</body>
+</html>
