@@ -201,6 +201,25 @@
   .disclaimer{
     max-width:var(--maxw); margin:0 auto; padding:0 24px 36px; font-size:12.5px; color:var(--muted);
   }
+
+  /* early access band */
+  .early-band{background:var(--navy); color:#fff; padding:14px 0;}
+  .early-band .wrap{display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap; text-align:center; font-size:14px; font-weight:600;}
+  .early-band .pill{background:var(--gold); color:#1a1303; font-size:11.5px; font-weight:800; padding:4px 10px; border-radius:999px;}
+
+  /* faq */
+  .faq{max-width:760px; margin:0 auto;}
+  .faq-item{border-bottom:1px solid var(--line); padding:18px 0;}
+  .faq-item summary{cursor:pointer; font-weight:700; font-size:15.5px; color:var(--navy); list-style:none; display:flex; justify-content:space-between; align-items:center;}
+  .faq-item summary::-webkit-details-marker{display:none;}
+  .faq-item summary:after{content:'+'; font-size:20px; color:var(--teal); font-weight:400;}
+  .faq-item[open] summary:after{content:'−';}
+  .faq-item p{margin:10px 0 0; color:var(--muted); font-size:14.5px; line-height:1.7;}
+
+  /* legal links */
+  .legal-links{display:flex; gap:16px; flex-wrap:wrap; font-size:12.5px;}
+  .legal-links a{color:var(--muted);}
+  .legal-links a:hover{color:var(--teal-2);}
 </style>
 </head>
 <body>
@@ -228,16 +247,16 @@
     <div>
       <div class="eyebrow">⚡ <span data-ar="مصمم خصيصاً لعيادات السعودية" data-en="Built specifically for Saudi clinics">مصمم خصيصاً لعيادات السعودية</span></div>
       <h1>
-        <span data-ar="مُستقبل ذكي وتوجيه آلي لعيادتك — لا تشخيص، فقط كفاءة" data-en="An AI receptionist and smart routing system for your clinic">مُستقبل ذكي وتوجيه آلي لعيادتك — لا تشخيص، فقط كفاءة</span>
+        <span data-ar="كل اتصال فايت = مريض راح لعيادة ثانية" data-en="Every missed call is a patient who booked elsewhere">كل اتصال فايت = مريض راح لعيادة ثانية</span>
       </h1>
-      <p class="lead" data-ar="Nexus يستقبل مرضاك على واتساب، يحجز المواعيد، يوجّههم للقسم الصحيح، ويرسل التذكيرات — بدون ما يفوتك أي اتصال أو حجز." data-en="Nexus answers your patients on WhatsApp, books appointments, routes them to the right department, and sends reminders — so you never miss a call or a booking again.">Nexus يستقبل مرضاك على واتساب، يحجز المواعيد، يوجّههم للقسم الصحيح، ويرسل التذكيرات — بدون ما يفوتك أي اتصال أو حجز.</p>
+      <p class="lead" data-ar="Nexus يرد على مرضاك في واتساب فوراً، يحجزهم، ويذكّرهم بموعدهم — حتى وانت مقفل أو مشغول. صفر مكالمات فايتة." data-en="Nexus replies to your patients on WhatsApp instantly, books them, and reminds them — even when you're closed or busy. Zero missed calls.">Nexus يرد على مرضاك في واتساب فوراً، يحجزهم، ويذكّرهم بموعدهم — حتى وانت مقفل أو مشغول. صفر مكالمات فايتة.</p>
       <div class="hero-ctas">
-        <a class="btn btn-dark" href="#contact"><span data-ar="اطلب عرضاً تجريبياً" data-en="Book a demo">اطلب عرضاً تجريبياً</span></a>
+        <a class="btn btn-dark" href="https://wa.me/966507237246?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A3%D8%A8%D8%AF%D8%A3%20%D9%85%D8%B9%20Nexus" target="_blank" rel="noopener"><span data-ar="ابدأ الآن مجاناً" data-en="Start Free">ابدأ الآن مجاناً</span></a>
         <a class="btn btn-ghost" href="#how"><span data-ar="شاهد كيف يعمل" data-en="See how it works">شاهد كيف يعمل</span></a>
       </div>
       <div class="trustrow">
         <span>🇸🇦 <b data-ar="مبني للسوق السعودي" data-en="Built for the KSA market">مبني للسوق السعودي</b></span>
-        <span>💬 <b data-ar="عربي طبيعي ومهني" data-en="Natural, professional Arabic">عربي طبيعي ومهني</b></span>
+        <span>🔐 <b data-ar="بياناتك داخل المملكة، متوافق مع PDPL" data-en="Data stays in-Kingdom, PDPL-compliant">بياناتك داخل المملكة، متوافق مع PDPL</b></span>
         <span>🔒 <b data-ar="لا تشخيص طبي، فقط توجيه" data-en="No diagnosis — routing only">لا تشخيص طبي، فقط توجيه</b></span>
       </div>
     </div>
@@ -265,12 +284,19 @@ General · Dental · OB/GYN · Pediatrics · Ophthalmology">تمام ✅ أي ق
   </div>
 </section>
 
+<div class="early-band">
+  <div class="wrap">
+    <span class="pill" data-ar="إطلاق مبكر" data-en="Early access">إطلاق مبكر</span>
+    <span data-ar="نستقبل أول مجموعة عيادات في السعودية الآن — انضم مبكراً واحصل على دعم مباشر من فريقنا" data-en="We're onboarding our first clinics in Saudi Arabia right now — join early and get direct support from our team">نستقبل أول مجموعة عيادات في السعودية الآن — انضم مبكراً واحصل على دعم مباشر من فريقنا</span>
+  </div>
+</div>
+
 <section class="bg-soft">
   <div class="wrap">
     <div class="section-head">
       <div class="tag" data-ar="المشكلة" data-en="The problem">المشكلة</div>
-      <h2 data-ar="كل اتصال فايت = مريض راح لعيادة ثانية" data-en="Every missed call is a patient who booked elsewhere">كل اتصال فايت = مريض راح لعيادة ثانية</h2>
-      <p data-ar="السكرتارية التقليدية محدودة بساعات العمل، الأخطاء البشرية، وضغط المكالمات. Nexus يحل هذا بدون ما يستبدل فريقك." data-en="Traditional front-desk staff are limited by office hours, human error, and call volume. Nexus solves this without replacing your team.">السكرتارية التقليدية محدودة بساعات العمل، الأخطاء البشرية، وضغط المكالمات. Nexus يحل هذا بدون ما يستبدل فريقك.</p>
+      <h2 data-ar="السكرتارية التقليدية بطبيعتها بتفوّت مرضى" data-en="Traditional front desks are built to miss patients">السكرتارية التقليدية بطبيعتها بتفوّت مرضى</h2>
+      <p data-ar="محدودة بساعات العمل، الأخطاء البشرية، وضغط المكالمات. Nexus يحل هذا بدون ما يستبدل فريقك." data-en="Limited by office hours, human error, and call volume. Nexus solves this without replacing your team.">محدودة بساعات العمل، الأخطاء البشرية، وضغط المكالمات. Nexus يحل هذا بدون ما يستبدل فريقك.</p>
     </div>
     <div class="compare">
       <div class="card card-bad">
@@ -389,7 +415,7 @@ General · Dental · OB/GYN · Pediatrics · Ophthalmology">تمام ✅ أي ق
         <a class="btn btn-ghost" href="#contact" data-ar="ابدأ الآن" data-en="Get started">ابدأ الآن</a>
       </div>
       <div class="plan featured">
-        <div class="badge" data-ar="الأكثر طلباً" data-en="Most popular">الأكثر طلباً</div>
+        <div class="badge" data-ar="الأنسب لمعظم العيادات" data-en="Recommended">الأنسب لمعظم العيادات</div>
         <h3 data-ar="احترافي" data-en="Professional">احترافي</h3>
         <div class="desc" data-ar="لعيادة متعددة الأطباء" data-en="For a multi-doctor clinic">لعيادة متعددة الأطباء</div>
         <div class="price">599 <span data-ar="ر.س / شهرياً" data-en="SAR / month">ر.س / شهرياً</span></div>
@@ -407,7 +433,7 @@ General · Dental · OB/GYN · Pediatrics · Ophthalmology">تمام ✅ أي ق
         <div class="price">999 <span data-ar="ر.س / شهرياً" data-en="SAR / month">ر.س / شهرياً</span></div>
         <ul>
           <li><span class="ico ico-good">✓</span><span data-ar="عدد غير محدود من الأطباء" data-en="Unlimited doctors">عدد غير محدود من الأطباء</span></li>
-          <li><span class="ico ico-good">✓</span><span data-ar="مُستقبل صوتي بالذكاء الاصطناعي" data-en="Voice AI receptionist">مُستقبل صوتي بالذكاء الاصطناعي</span></li>
+          <li><span class="ico" style="background:var(--gold)">⏳</span><span data-ar="مُستقبل صوتي بالذكاء الاصطناعي (قريباً)" data-en="Voice AI receptionist (coming soon)">مُستقبل صوتي بالذكاء الاصطناعي (قريباً)</span></li>
           <li><span class="ico ico-good">✓</span><span data-ar="فوترة متوافقة مع زاتكا" data-en="ZATCA-compliant invoicing">فوترة متوافقة مع زاتكا</span></li>
           <li><span class="ico ico-good">✓</span><span data-ar="دعم ذو أولوية" data-en="Priority support">دعم ذو أولوية</span></li>
         </ul>
@@ -426,84 +452,22 @@ General · Dental · OB/GYN · Pediatrics · Ophthalmology">تمام ✅ أي ق
         <a class="btn btn-ghost" href="#contact" data-ar="تواصل معنا" data-en="Contact us">تواصل معنا</a>
       </div>
     </div>
-  </div>
-</section>
-
-<section class="bg-soft">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="tag" data-ar="لماذا Nexus" data-en="Why Nexus">لماذا Nexus</div>
-      <h2 data-ar="بُني للسوق السعودي من البداية" data-en="Built for the Saudi market from the ground up">بُني للسوق السعودي من البداية</h2>
+    <div class="faq">
+      <details class="faq-item">
+        <summary><span data-ar="كم يستغرق تفعيل النظام لعيادتي؟" data-en="How long does setup take?">كم يستغرق تفعيل النظام لعيادتي؟</span></summary>
+        <p data-ar="نجمع معلومات عيادتك (الأقسام، الأطباء، المواعيد المتاحة) ونربط رقم واتساب عيادتك. خلال الإطلاق المبكر، فريقنا يتولى الربط يدوياً معك مباشرة لضمان كل شيء يعمل بشكل صحيح من أول يوم." data-en="We collect your clinic's info (departments, doctors, available slots) and connect your WhatsApp number. During early access, our team handles the connection with you directly to make sure everything works correctly from day one.">نجمع معلومات عيادتك (الأقسام، الأطباء، المواعيد المتاحة) ونربط رقم واتساب عيادتك. خلال الإطلاق المبكر، فريقنا يتولى الربط يدوياً معك مباشرة لضمان كل شيء يعمل بشكل صحيح من أول يوم.</p>
+      </details>
+      <details class="faq-item">
+        <summary><span data-ar="هل يحل Nexus محل موظف الاستقبال؟" data-en="Does Nexus replace my front-desk staff?">هل يحل Nexus محل موظف الاستقبال؟</span></summary>
+        <p data-ar="لا. Nexus يتولى الردود الروتينية والحجز خارج وخلال ساعات الدوام، وأي حالة حساسة أو طلب خاص يتحول فوراً لموظفك عبر تنبيه واتساب. أنت دائماً تتحكم في الحالات المهمة." data-en="No. Nexus handles routine replies and booking inside and outside office hours, and any sensitive case or special request is escalated instantly to your staff via a WhatsApp alert. You stay in control of anything that matters.">لا. Nexus يتولى الردود الروتينية والحجز خارج وخلال ساعات الدوام، وأي حالة حساسة أو طلب خاص يتحول فوراً لموظفك عبر تنبيه واتساب. أنت دائماً تتحكم في الحالات المهمة.</p>
+      </details>
+      <details class="faq-item">
+        <summary><span data-ar="هل بياناتي وبيانات مرضاي آمنة؟" data-en="Is my data and my patients' data secure?">هل بياناتي وبيانات مرضاي آمنة؟</span></summary>
+        <p data-ar="البيانات مشفرة ومخزنة في قاعدة بيانات منفصلة لكل عيادة، مع صلاحيات وصول مقيدة. لا نشارك بياناتك مع أي طرف ثالث." data-en="Data is encrypted and stored in a clinic-scoped database with restricted access policies. We never share your data with third parties.">البيانات مشفرة ومخزنة في قاعدة بيانات منفصلة لكل عيادة، مع صلاحيات وصول مقيدة. لا نشارك بياناتك مع أي طرف ثالث.</p>
+      </details>
+      <details class="faq-item">
+        <summary><span data-ar="هل يمكنني الإلغاء في أي وقت؟" data-en="Can I cancel anytime?">هل يمكنني الإلغاء في أي وقت؟</span></summary>
+        <p data-ar="نعم، بدون عقود طويلة الأمد. راسلنا عبر واتساب أو الإيميل وسنوقف الاشتراك في أي وقت تريد." data-en="Yes, no long-term contracts. Message us on WhatsApp or email and we'll cancel whenever you want.">نعم، بدون عقود طويلة الأمد. راسلنا عبر واتساب أو الإيميل وسنوقف الاشتراك في أي وقت تريد.</p>
+      </details>
     </div>
-    <div class="diffgrid">
-      <div class="diffrow">
-        <span class="ico ico-good">✓</span>
-        <div><b data-ar="تركيز كامل على السعودية" data-en="100% Saudi-focused">تركيز كامل على السعودية</b><span data-ar="مبني للهجة واللغة والسوق السعودي، لا حل عام مترجم." data-en="Built for Saudi dialect, language, and market — not a generic translated tool.">مبني للهجة واللغة والسوق السعودي، لا حل عام مترجم.</span></div>
-      </div>
-      <div class="diffrow">
-        <span class="ico ico-good">✓</span>
-        <div><b data-ar="محادثة واتساب حقيقية، لا قوائم جامدة فقط" data-en="Real conversational WhatsApp, not just static menus">محادثة واتساب حقيقية، لا قوائم جامدة فقط</b><span data-ar="فهم نية المريض، لا أزرار اختيار فقط." data-en="Understands patient intent — not just button taps.">فهم نية المريض، لا أزرار اختيار فقط.</span></div>
-      </div>
-      <div class="diffrow">
-        <span class="ico ico-good">✓</span>
-        <div><b data-ar="مُستقبل صوتي قادم" data-en="Voice AI receptionist (coming)">مُستقبل صوتي قادم</b><span data-ar="يرد على المكالمات الهاتفية ويحجز المواعيد صوتياً." data-en="Answers phone calls and books appointments by voice.">يرد على المكالمات الهاتفية ويحجز المواعيد صوتياً.</span></div>
-      </div>
-      <div class="diffrow">
-        <span class="ico ico-good">✓</span>
-        <div><b data-ar="جاهزية للامتثال السعودي" data-en="Saudi compliance-ready">جاهزية للامتثال السعودي</b><span data-ar="فوترة متوافقة مع زاتكا في الخطط المتقدمة." data-en="ZATCA-compliant invoicing on advanced plans.">فوترة متوافقة مع زاتكا في الخطط المتقدمة.</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="contact">
-  <div class="wrap">
-    <div class="cta-band">
-      <h2 data-ar="جاهز تشوف Nexus يشتغل لعيادتك؟" data-en="Ready to see Nexus work for your clinic?">جاهز تشوف Nexus يشتغل لعيادتك؟</h2>
-      <p data-ar="عرض تجريبي مباشر على واتساب — بدون أي تعهد." data-en="A live WhatsApp demo — no commitment required.">عرض تجريبي مباشر على واتساب — بدون أي تعهد.</p>
-      <div class="hero-ctas">
-        <a class="btn btn-primary" href="https://wa.me/966507237246?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A3%D8%B9%D8%B1%D9%81%20%D8%A3%D9%83%D8%AB%D8%B1%20%D8%B9%D9%86%20Nexus%20%D9%84%D8%B9%D9%8A%D8%A7%D8%AF%D8%AA%D9%8A" target="_blank" rel="noopener">
-          <span data-ar="تواصل عبر واتساب" data-en="Chat on WhatsApp">تواصل عبر واتساب</span>
-        </a>
-        <a class="btn btn-ghost" style="background:#fff" href="mailto:m7md0596@hotmail.com">
-          <span data-ar="راسلنا بالإيميل" data-en="Email us">راسلنا بالإيميل</span>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="wrap footgrid">
-    <div class="brand"><span class="dot"></span> Nexus</div>
-    <div class="footnote" data-ar="© 2026 Nexus. جميع الحقوق محفوظة." data-en="© 2026 Nexus. All rights reserved.">© 2026 Nexus. جميع الحقوق محفوظة.</div>
-  </div>
-</footer>
-<div class="disclaimer" data-ar="Nexus نظام مُستقبل ذكي وتوجيه — وليس بديلاً عن التشخيص أو الاستشارة الطبية. جميع الحالات الطبية تتم مراجعتها من قبل الطاقم الطبي للعيادة." data-en="Nexus is an AI receptionist and routing system — not a substitute for medical diagnosis or consultation. All medical cases are reviewed by the clinic's own medical staff.">Nexus نظام مُستقبل ذكي وتوجيه — وليس بديلاً عن التشخيص أو الاستشارة الطبية. جميع الحالات الطبية تتم مراجعتها من قبل الطاقم الطبي للعيادة.</div>
-
-<script>
-(function(){
-  var STORAGE_KEY = 'nexus-lang';
-  var html = document.documentElement;
-  function applyLang(lang){
-    html.setAttribute('data-lang', lang);
-    html.setAttribute('lang', lang);
-    html.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
-    document.querySelectorAll('[data-ar][data-en]').forEach(function(el){
-      el.textContent = lang === 'ar' ? el.getAttribute('data-ar') : el.getAttribute('data-en');
-    });
-    var toggle = document.getElementById('langToggle');
-    if(toggle){ toggle.textContent = lang === 'ar' ? 'EN' : 'AR'; }
-    try{ localStorage.setItem(STORAGE_KEY, lang); }catch(e){}
-  }
-  var saved = 'ar';
-  try{ saved = localStorage.getItem(STORAGE_KEY) || 'ar'; }catch(e){}
-  applyLang(saved);
-  document.getElementById('langToggle').addEventListener('click', function(){
-    var current = html.getAttribute('data-lang') || 'ar';
-    applyLang(current === 'ar' ? 'en' : 'ar');
-  });
-})();
-</script>
-</body>
-</html>
+  </d
